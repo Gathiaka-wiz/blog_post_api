@@ -8,6 +8,7 @@ import { connectDB } from './config/db.config.js';
 import { AuthRoutes } from './routes/auth.routes.js';
 import errorMiddleware from './middleware/error.middleware.js';
 import { errorLogger, routeLogger } from './middleware/logger.middleware.js'
+import { arcjetSecurity } from './middleware/arcjet.middleware.js';
 
 const app = express();
 
@@ -15,6 +16,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// Arcjet protection
+app.use(arcjetSecurity)
 
 // Routes
 app.use('/api/v1', AuthRoutes);
