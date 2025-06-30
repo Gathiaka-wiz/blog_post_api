@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
-    name: { type: String, required: true, trim:true },
+    name: { type: String, required: true, trim:true, Minlength: 6, MaxLength: 50 },
     email: { 
         type: String, 
         required: true, 

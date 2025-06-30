@@ -6,7 +6,8 @@ import colors from 'colors';
 import { PORT } from './config/env.config.js';
 import { connectDB } from './config/db.config.js';
 import { AuthRoutes } from './routes/auth.routes.js';
-
+import errorMiddleware from './middleware/error.middleware.js';
+import { errorLogger, routeLogger } from './middleware/logger.middleware.js'
 
 const app = express();
 
@@ -14,8 +15,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+
 // Routes
 app.use('/api/v1', AuthRoutes);
+
+//  middleware    
+app.use(errorLogger)
+app.use(errorMiddleware)
+app.use(routeLogger);
 
 app.listen(PORT ,async () => {
     await connectDB();
