@@ -19,7 +19,7 @@ const verifyToken = async (req, res, next) => {
         next();
 
     } catch (error) {
-        console.error("Error in verifyToken middleware:", error).bold.red;
+        console.error("Error in verifyToken middleware:", error).red.bold;
         res.status(500).json({
             success: false,
             message: 'Server Error',

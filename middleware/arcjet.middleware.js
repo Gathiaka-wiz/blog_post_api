@@ -20,7 +20,8 @@ const aj = arcjet({
                 // Uncomment to allow these other common bot categories
                 // See the full list at https://arcjet.com/bot-list
                 "CATEGORY:MONITOR", // Uptime monitoring services
-                "CATEGORY:PREVIEW", // Link previews e.g. Slack, Discord
+                "CATEGORY:PREVIEW",
+                "POSTMAN" //! Common API testing tool Remove before production
             ],
     }),
     // Create a token bucket rate limit. Other algorithms are supported.
@@ -34,35 +35,36 @@ const aj = arcjet({
 });
 
 
-export const arcjetSecurity =  async (req, res) => {
+export const arcjetSecurity =  async (req, res,next) => {
     const decision = await aj.protect(req, { requested: 5 }); // Deduct 5 tokens from the bucket
     console.log("Arcjet decision", decision);
 
     if (decision.isDenied()) {
         if (decision.reason.isRateLimit()) {
-            res.statuscode(429).json({
+            res.status(429).json({
                 success: false,
                 error: "Too Many Requests",
                 message: "You have exceeded the rate limit. Please try again later.",
             });
         } else if (decision.reason.isBot()) {
-            res.statuscode(403).json({
+            res.status(403).json({
                 success: false,
                 error: "Forbidden",
                 message: "Bots are not allowed to access this resource.",
             });
         } else {
-            res.statuscode(403).json({
+            res.status(403).json({
                 success: false,
                 error: "Forbidden",
                 message: "Access denied.",
             });
         }
     } else if (decision.results.some(isSpoofedBot)) {
-        res.statuscode(403).json({
+        res.status(403).json({
             success: false,
             error: "Forbidden",
             message: "Access denied due to spoofed bot detection.",
         });
     }
+    next()
 };

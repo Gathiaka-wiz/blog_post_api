@@ -1,5 +1,6 @@
 import { body } from 'express-validator';
 
+// Auth validation
 export const signupValidation = [
     body('name').trim().notEmpty().withMessage('Name is required').escape(),
     body('email').isEmail().withMessage('Valid email is required').normalizeEmail(),
@@ -15,5 +16,21 @@ export const loginValidation = [
 ];
 
 export const eraseDataValidation = [
+    body('password').notEmpty().withMessage('Password is required').escape(),
+];
+
+
+// Blog validation
+export const createBlogValidation = [
+    body('title').trim().notEmpty().withMessage('Title is required').escape(),
+    body('content').trim().notEmpty().withMessage('Content is required').escape(),
+];
+
+export const editBlogValidation = [
+    body('title').trim().notEmpty().withMessage('Title is required').escape(),
+    body('content').trim().notEmpty().withMessage('Content is required').escape(),
+];
+
+export const deleteBlogValidation = [
     body('password').notEmpty().withMessage('Password is required').escape(),
 ];

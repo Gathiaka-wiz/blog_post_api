@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { validationResult } from 'express-validator';
 
 
-import { login, logout, signup, eraseData } from '../controller/auth.controller.js';
+import { login, logout, signup, eraseData } from '../controllers/auth.controller.js';
 import { signupValidation, loginValidation, eraseDataValidation } from '../middleware/validation.middleware.js';
 import  verifyToken  from '../middleware/verifyToken.middleware.js';
 
