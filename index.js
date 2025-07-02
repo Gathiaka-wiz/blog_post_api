@@ -4,6 +4,7 @@ import colors from 'colors';
 
 // Import routes
 import { AuthRoutes } from './routes/auth.routes.js';
+import { AdminBlogRoutes } from './routes/AdminBlog.routes.js';
 import { BlogRoutes } from './routes/blog.routes.js';
 
 // Load local exports
@@ -25,7 +26,8 @@ app.use(arcjetSecurity);
 
 // Routes
 app.use('/api/v1', AuthRoutes);
-app.use('/api/v1/blogs',BlogRoutes );
+app.use('/api/v1/blogs', AdminBlogRoutes );
+app.use('/api/v1/blogs', BlogRoutes );
 
 //  middleware    
 app.use(errorLogger)
