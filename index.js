@@ -32,7 +32,7 @@ app.use('/api/v1/auth', AuthRoutes);
 app.use('/api/v1/admin/blogs', AdminBlogRoutes );
 app.use('/api/v1/blogs', BlogRoutes );
 app.use('/api/v1/blog/comment', CommentRoutes);
-app.use('/api/v1/blog/like', LikeRoutes);
+app.use('/api/v1/blog', LikeRoutes);
 
 //  middleware    
 app.use(errorLogger)

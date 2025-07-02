@@ -58,3 +58,9 @@ export const deleteCommentValidation = [
     param('id').isMongoId().withMessage('Invalid blog id'),
     param('commentId').isMongoId().withMessage('Invalid comment id').escape(),
 ];
+
+
+// Like validation
+export const likeBlogValidation = [
+    param('id').isMongoId().withMessage('Invalid Blog id').escape()
+]
