@@ -1,4 +1,4 @@
-import { application, Router } from 'express';
+import { Router } from 'express';
 
 // middleware imports
 import { verifyUser } from "../middleware/verifyUser.middleware.js";
@@ -9,7 +9,7 @@ import { getAllBlogs, getBlogById } from '../controllers/blog.controller.js';
 
 const router = Router();
 
-router.use(verifyUser);
+// router.use(verifyUser);
 
 router.get('/', getAllBlogs);
 

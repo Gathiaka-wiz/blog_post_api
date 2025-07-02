@@ -43,27 +43,23 @@ export const arcjetSecurity =  async (req, res,next) => {
         if (decision.reason.isRateLimit()) {
             res.status(429).json({
                 success: false,
-                error: "Too Many Requests",
-                message: "You have exceeded the rate limit. Please try again later.",
+                message: "Too Many Requests : You have exceeded the rate limit. Please try again later.",
             });
         } else if (decision.reason.isBot()) {
             res.status(403).json({
                 success: false,
-                error: "Forbidden",
-                message: "Bots are not allowed to access this resource.",
+                message: "Forbidden : Bots are not allowed to access this resource.",
             });
         } else {
             res.status(403).json({
                 success: false,
-                error: "Forbidden",
-                message: "Access denied.",
+                message: "Forbidden :   Access denied.",
             });
         }
     } else if (decision.results.some(isSpoofedBot)) {
         res.status(403).json({
             success: false,
-            error: "Forbidden",
-            message: "Access denied due to spoofed bot detection.",
+            message: "Forbidden : Access denied due to spoofed bot detection.",
         });
     }
     next()

@@ -6,6 +6,9 @@ import colors from 'colors';
 import { AuthRoutes } from './routes/auth.routes.js';
 import { AdminBlogRoutes } from './routes/AdminBlog.routes.js';
 import { BlogRoutes } from './routes/blog.routes.js';
+import { CommentRoutes } from './routes/comment.routes.js';
+import { LikeRoutes } from './routes/like.routes.js';
+
 
 // Load local exports
 import { PORT } from './config/env.config.js';
@@ -25,9 +28,11 @@ app.use(cookieParser());
 app.use(arcjetSecurity);
 
 // Routes
-app.use('/api/v1', AuthRoutes);
-app.use('/api/v1/blogs', AdminBlogRoutes );
+app.use('/api/v1/auth', AuthRoutes);
+app.use('/api/v1/admin/blogs', AdminBlogRoutes );
 app.use('/api/v1/blogs', BlogRoutes );
+app.use('/api/v1/blog/comment', CommentRoutes);
+app.use('/api/v1/blog/like', LikeRoutes);
 
 //  middleware    
 app.use(errorLogger)

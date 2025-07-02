@@ -1,5 +1,5 @@
-import  BlogPost  from '../models/BlogPost.js';
-import  User  from '../models/User.js';
+import  BlogPost  from '../models/BlogPost.model.js';
+import  User  from '../models/User.model.js';
 
 export const  createBlog = async (req, res) => {
     const { title, content } = req.body;
@@ -76,8 +76,8 @@ export const  editBlog = async (req, res) => {
         };
         
         // Update the blog post
-        blogPostExists.title = title || blogPostExists.title;
-        blogPostExists.content = content || blogPostExists.content;
+        blogPostExists.title = title;
+        blogPostExists.content = content; 
 
         await blogPostExists.save();
 

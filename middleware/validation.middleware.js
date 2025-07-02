@@ -37,3 +37,24 @@ export const deleteBlogValidation = [
     param('id').isMongoId().withMessage('Invalid blog id'),
     body('title').trim().notEmpty().withMessage('Title is required').escape(),
 ];
+
+
+// Comment validation
+export const createCommentValidation = [
+    param('id').isMongoId().withMessage('Invalid blog id'),
+    body('post').isMongoId().withMessage('Invalid blog id'),
+    body('text').trim().notEmpty().withMessage('Content is required').escape(),
+];
+
+
+export const updateCommentValidation = [
+    param('id').isMongoId().withMessage('Invalid blog id'),
+    param('commentId').isMongoId().withMessage('Invalid comment id'),
+    body('text').trim().notEmpty().withMessage('Content is required').escape(),
+];
+
+
+export const deleteCommentValidation = [
+    param('id').isMongoId().withMessage('Invalid blog id'),
+    param('commentId').isMongoId().withMessage('Invalid comment id').escape(),
+];

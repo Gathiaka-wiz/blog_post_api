@@ -1,7 +1,7 @@
 import  bcrypt, { hash }  from 'bcryptjs';
 import colors from 'colors';
 
-import User from '../models/User.js';
+import User from '../models/User.model.js';
 import { generateTokenAndSetCookie } from '../utils/generateTokenAndSetCookie.js';
 
 export const signup = async (req, res) => {
