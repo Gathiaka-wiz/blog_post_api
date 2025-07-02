@@ -14,11 +14,12 @@ const router = Router();
 router.use(verifyToken)
 router.use(isAdmin);
 
-router.post('/create',createBlogValidation,  createBlog );
 
-router.post('/edit', editBlogValidation, editBlog );
+router.post('/create-blog',createBlogValidation,  createBlog );
 
-router.delete('/delete',deleteBlogValidation, deleteBlog );
+router.patch('/edit-blog/:id', editBlogValidation, editBlog );
+
+router.delete('/delete-blog/:id',deleteBlogValidation, deleteBlog );
 
 
 export const BlogRoutes = router;

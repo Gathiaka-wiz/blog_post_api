@@ -1,4 +1,5 @@
 import { body } from 'express-validator';
+import { param } from 'express-validator';
 
 // Auth validation
 export const signupValidation = [
@@ -27,10 +28,12 @@ export const createBlogValidation = [
 ];
 
 export const editBlogValidation = [
+    param('id').isMongoId().withMessage('Invalid blog id'),
     body('title').trim().notEmpty().withMessage('Title is required').escape(),
     body('content').trim().notEmpty().withMessage('Content is required').escape(),
 ];
 
 export const deleteBlogValidation = [
-    body('password').notEmpty().withMessage('Password is required').escape(),
+    param('id').isMongoId().withMessage('Invalid blog id'),
+    body('title').trim().notEmpty().withMessage('Title is required').escape(),
 ];
