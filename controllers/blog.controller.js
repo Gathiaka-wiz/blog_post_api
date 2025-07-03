@@ -3,13 +3,41 @@ import BlogPost from "../models/BlogPost.model.js";
 
 export const getAllBlogs = async (req, res) => {
     try {
-        const blogs = await BlogPost.find({})
+            const blogs = await BlogPost.find({})
+                    .populate('author', 'name').
+                        populate({
+                            path:'comments',
+                            populate:{
+                                path:'user',
+                                select:'name'
+                            } 
+                    });
+
+
+            const editedBlog =  blogs.map( (blog) => {
+                    return{
+                        ...blog._doc,
+                        author: blog.author.name,
+                        likes: blog.likes.length,
+                        comments: blog.comments.map(comment => {
+                            return {
+                                _id:comment._id,
+                                name:comment.user?.name,
+                                text:comment.text,
+                                post:comment.post,
+                                createdAt:comment.createdAt
+                            }
+                        })
+                }
+            })
+        
+            // const editedBlog = blogs.map( (blog) => { return blog.title } )
 
 
         res.status(200).json({
             success: true,
             message: "Blogs fetched successfully",
-            blogs
+            blogs:editedBlog
         });
 
     } catch (error) {
@@ -33,10 +61,34 @@ export const getBlogById = async (req, res) => {
             });
         }
 
-        res.status(200).json({
+        const blog = await BlogPost.findById(id)
+                .populate('author', 'name')
+                .populate({ 
+                    path:'comments',
+                    populate:{
+                        path:'user',
+                        select:'name'
+                    }
+                });
+        
+        await res.status(200).json({
             success: true,
             message: "Blog fetched successfully",
-            blog: existingBlog
+            // blog:formattedBlog,
+            blog:{
+                ...blog._doc,
+                author: blog.author.name,
+                likes: blog.likes.length,
+                comments: blog.comments.map(comment => {
+                    return {
+                        _id:comment._id,
+                        name:comment.user?.name,
+                        text:comment.text,
+                        post:comment.post,
+                        createdAt:comment.createdAt
+                    }
+                })
+            }
         });
 
     } catch (error) {
