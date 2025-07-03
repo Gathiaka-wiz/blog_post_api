@@ -29,7 +29,7 @@ app.use(arcjetSecurity);
 
 // Routes
 app.use('/api/v1/auth', AuthRoutes);
-app.use('/api/v1/admin/blogs', AdminBlogRoutes );
+app.use('/api/v1/admin/', AdminBlogRoutes );
 app.use('/api/v1/blogs', BlogRoutes );
 app.use('/api/v1/blog/comment', CommentRoutes);
 app.use('/api/v1/blog', LikeRoutes);
