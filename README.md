@@ -1,6 +1,6 @@
 # Blogger Post API
 
-A secure, modern RESTful API for blogging, built with **Node.js**, **Express**, **MongoDB**, and **Arcjet** for advanced security.  
+A secure, modern RESTful API for blogging, built with **Node.js**, **Express**, **MongoDB**, **Express-validator** for requests sanitization  and **Arcjet** for advanced security.  
 This API supports user authentication, blog CRUD, comments, likes, admin controls, and robust input validation and rate limiting.
 
 ---
