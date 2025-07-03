@@ -21,7 +21,7 @@ const aj = arcjet({
                 // See the full list at https://arcjet.com/bot-list
                 "CATEGORY:MONITOR", // Uptime monitoring services
                 "CATEGORY:PREVIEW",
-                "POSTMAN" //! Common API testing tool Remove before production
+                // "POSTMAN" //! Common API testing tool Remove before production
             ],
     }),
     // Create a token bucket rate limit. Other algorithms are supported.
